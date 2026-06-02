@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedAI Health Screening Platform — UAJK AIS Society</title>
+  <meta name="description" content="Professional AI-Powered Medical Diagnostics and Screening Platform by UAJK Artificial Intelligence Society." />
+  <link rel="stylesheet" href="static/css/style.css" />
+  <link rel="icon" href="static/assets/logo.png" />
+</head>
+<body>
+
+  <div class="app-shell">
+    
+    <!-- ====== DESKTOP SIDEBAR ====== -->
+    <aside class="app-sidebar" id="appSidebar">
+      <div class="sidebar-brand">
+        <img src="static/assets/logo.png" alt="UAJK AIS Logo" />
+        <div class="brand-text">
+          MedAI
+          <span>UAJK AIS Society</span>
+        </div>
+      </div>
+      
+      <div class="sidebar-nav">
+        <button class="nav-item active" data-target="dashboard" onclick="navigateTo('dashboard')">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          <span>Dashboard</span>
+        </button>
+        
+        <div class="nav-divider"></div>
+        
+        <button class="nav-item" data-target="heart" onclick="navigateTo('heart')">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <span>Heart Risk</span>
+        </button>
+        
+        <button class="nav-item" data-target="hypertension" onclick="navigateTo('hypertension')">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span>Hypertension</span>
+        </button>
+        
+        <button class="nav-item" data-target="diabetes" onclick="navigateTo('diabetes')">
+          <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          <span>Diabetes</span>
+        </button>
+        
+        <div class="nav-divider"></div>
+        
+        <button class="nav-item" data-target="calculators" onclick="navigateTo('calculators')">
+          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+          <span>Calculators</span>
+        </button>
+        
+        <button class="nav-item" data-target="history" onclick="navigateTo('history')">
+          <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>History Log</span>
+        </button>
+        
+        <button class="nav-item" data-target="about" onclick="navigateTo('about')">
+          <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+          <span>About UAJK AIS</span>
+        </button>
+
+        <button class="nav-item" data-target="settings" onclick="navigateTo('settings')">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          <span>Settings</span>
+        </button>
+      </div>
+      
+      <div class="sidebar-footer">
+        <button class="toggle-sidebar-btn" id="sidebarToggle" onclick="toggleSidebarCollapse()" title="Collapse Menu">
+          <svg viewBox="0 0 24 24" id="toggleIcon"><path d="M15 19l-7-7 7-7"/></svg>
+        </button>
+      </div>
+    </aside>
+    
+    <!-- ====== MOBILE BOTTOM NAVIGATION ====== -->
+    <nav class="mobile-nav">
+      <button class="mobile-nav-item active" data-target="dashboard" onclick="navigateTo('dashboard')">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="mobile-nav-item" data-target="screenings-list" onclick="navigateTo('screenings-list')">
+        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <span>Screenings</span>
+      </button>
+      <button class="mobile-nav-item" data-target="calculators" onclick="navigateTo('calculators')">
+        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+        <span>Calcs</span>
+      </button>
+      <button class="mobile-nav-item" data-target="history" onclick="navigateTo('history')">
+        <svg viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>History</span>
+      </button>
+    </nav>
+    
+    <!-- ====== MAIN WORKSPACE ====== -->
+    <main class="app-main">
+      <header class="app-header">
+        <div class="header-title-area">
+          <h1 id="headerTitle">Dashboard</h1>
+        </div>
+        <div class="header-status">
+          <div class="status-badge live" id="systemStatusBadge">
+            <span class="status-dot"></span>
+            <span id="systemStatusText">SYSTEM LIVE</span>
+          </div>
+        </div>
+      </header>
+      
+      <div class="app-content" id="appContent">
+        
+        <!-- ====== 1. DASHBOARD VIEW ====== -->
+        <div class="page-view active" id="view-dashboard">
+          <div class="welcome-card">
+            <span class="welcome-badge">UAJK AIS Technology</span>
+            <h2>Welcome to MedAI screening</h2>
+            <p>Empowering clinicians and researchers at the University of Azad Jammu & Kashmir with advanced machine learning models for early risk detection of cardiovascular and metabolic diseases.</p>
+          </div>
+          
+          <div class="dashboard-grid">
+            <div class="dashboard-main-col">
+              <div class="screening-options-list">
+                <!-- Heart Disease -->
+                <div class="screening-option-card heart">
+                  <div class="option-card-info">
+                    <div class="option-card-icon">
+                      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                    </div>
+                    <div class="option-card-details">
+                      <h3>Heart Disease Screening</h3>
+                      <p>Analyze cardiovascular parameters like resting blood pressure, cholesterol, ECG, and vessel blockages using our trained Gradient Boosting model.</p>
+                      <div class="option-card-meta">
+                        <span class="meta-pill">13 Features</span>
+                        <span class="meta-pill est-time">Est. 3 mins</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary" onclick="navigateTo('heart')">Start Assessment</button>
+                </div>
+                
+                <!-- Hypertension -->
+                <div class="screening-option-card hyper">
+                  <div class="option-card-info">
+                    <div class="option-card-icon">
+                      <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    </div>
+                    <div class="option-card-details">
+                      <h3>Hypertension Screening</h3>
+                      <p>Run full clinical screening mapping 19 lifestyle markers, stress indicators, lipid profiles, and blood pressures through our Random Forest model.</p>
+                      <div class="option-card-meta">
+                        <span class="meta-pill">19 Features</span>
+                        <span class="meta-pill est-time">Est. 4 mins</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary" onclick="navigateTo('hypertension')">Start Assessment</button>
+                </div>
+                
+                <!-- Diabetes -->
+                <div class="screening-option-card diabetes">
+                  <div class="option-card-info">
+                    <div class="option-card-icon">
+                      <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                    </div>
+                    <div class="option-card-details">
+                      <h3>Diabetes Screening</h3>
+                      <p>Screen for diabetes risks based on 8 core biomarkers including blood glucose levels, insulin, pregnancy history, and family pedigree.</p>
+                      <div class="option-card-meta">
+                        <span class="meta-pill">8 Features</span>
+                        <span class="meta-pill est-time">Est. 2 mins</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary" onclick="navigateTo('diabetes')">Start Assessment</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="dashboard-sidebar-col">
+              <div class="dashboard-card" style="margin-bottom: 24px;">
+                <div class="dashboard-card-header">
+                  <h3>Recent Screenings</h3>
+                  <span class="action-link" onclick="navigateTo('history')">View All</span>
+                </div>
+                <div class="recent-list" id="dashboardRecentList">
+                  <!-- Loaded dynamically by app.js -->
+                  <div style="font-size:0.85rem;color:var(--text-secondary);text-align:center;padding:20px 0;">No assessments run in this session yet.</div>
+                </div>
+              </div>
+              
+              <div class="dashboard-card">
+                <div class="dashboard-card-header">
+                  <h3>Clinical Insights</h3>
+                </div>
+                <div class="insights-list">
+                  <div class="insight-card">
+                    <div class="insight-icon">
+                      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    </div>
+                    <div class="insight-details">
+                      <h4>Diabetes decision boundary</h4>
+                      <p>The Diabetes Model operates on a custom optimized probability threshold of 0.52 to balance sensitivity.</p>
+                    </div>
+                  </div>
+                  <div class="insight-card">
+                    <div class="insight-icon">
+                      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                    </div>
+                    <div class="insight-details">
+                      <h4>StandardScaler Preprocessing</h4>
+                      <p>All inputs are standardized against model training parameters before sending predictions to backend.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== SCREENINGS LIST VIEW (MOBILE ONLY) ====== -->
+        <div class="page-view" id="view-screenings-list">
+          <h2 style="font-family: var(--font-heading); margin-bottom: 20px;">Available Assessments</h2>
+          <div class="screening-options-list">
+            <!-- Dynamically cloned or styled in mobile view -->
+          </div>
+        </div>
+
+        <!-- ====== 2. HEART RISK WIZARD VIEW ====== -->
+        <div class="page-view" id="view-heart">
+          <div class="screening-wizard-container">
+            <div class="wizard-header">
+              <div class="wizard-title-area">
+                <div class="wizard-icon" style="background: rgba(239, 68, 68, 0.08); color: var(--danger);">
+                  <svg viewBox="0 0 24 24" style="width:20px;height:20px;"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                <h2>Heart Disease Screening</h2>
+              </div>
+              <div class="wizard-stepper" id="heartStepper">
+                <div class="stepper-progress-track"></div>
+                <div class="stepper-progress-fill" style="width:0%;"></div>
+                <div class="step-node active" data-step="1">1<span class="step-label">Personal</span></div>
+                <div class="step-node" data-step="2">2<span class="step-label">Vitals</span></div>
+                <div class="step-node" data-step="3">3<span class="step-label">Clinical</span></div>
+                <div class="step-node" data-step="4">4<span class="step-label">Advanced</span></div>
+                <div class="step-node" data-step="5">5<span class="step-label">Review</span></div>
+              </div>
+            </div>
+            
+            <form id="heartWizardForm" class="wizard-form" onsubmit="submitHeartScreening(event)">
+              <!-- STEP 1: Personal -->
+              <div class="wizard-step-pane active" data-step="1">
+                <h3>Step 1: Patient demographics</h3>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label" for="heart_age">Age <span class="label-hint">(1–120 years)</span></label>
+                    <input type="number" class="form-input" id="heart_age" name="age" placeholder="e.g., 55" min="1" max="120" required onchange="calculateHeartVitals()" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Biological Sex</label>
+                    <div class="segment-control">
+                      <div class="segment-item active" data-value="1" onclick="selectSegment(this, 'heart_sex_input')">Male</div>
+                      <div class="segment-item" data-value="0" onclick="selectSegment(this, 'heart_sex_input')">Female</div>
+                    </div>
+                    <input type="hidden" id="heart_sex_input" name="sex" value="1" />
+                  </div>
+                </div>
+              </div>
+              
+              <!-- STEP 2: Vitals -->
+              <div class="wizard-step-pane" data-step="2">
+                <h3>Step 2: Basic physiological indicators</h3>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label" for="heart_trestbps">Resting Blood Pressure <span class="label-hint">(mmHg, 80–200)</span></label>
+                    <input type="number" class="form-input" id="heart_trestbps" name="trestbps" placeholder="e.g., 130" min="80" max="200" required onchange="calculateHeartVitals()" />
+                    <button type="button" class="calculator-bridge-btn" onclick="openCalculatorFromForm('bp', 'heart_trestbps')">
+                      <svg viewBox="0 0 24 24"><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 9h6v2H9V9zm0 4h6v2H9v-2z"/></svg>
+                      Use BP Calculator
+                    </button>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Fasting Blood Sugar > 120 mg/dl</label>
+                    <div class="segment-control">
+                      <div class="segment-item active" data-value="0" onclick="selectSegment(this, 'heart_fbs_input')">No (Normal)</div>
+                      <div class="segment-item" data-value="1" onclick="selectSegment(this, 'heart_fbs_input')">Yes (&gt; 120 mg/dl)</div>
+                    </div>
+                    <input type="hidden" id="heart_fbs_input" name="fbs" value="0" />
+                  </div>
+                  <div class="form-group full-width">
+                    <label class="form-label">Resting Electrocardiographic Results (ECG)</label>
+                    <div class="radio-card-grid cols-3">
+                      <div class="radio-card active" data-value="0" onclick="selectRadioCard(this, 'heart_restecg_input')">
+                        <span class="radio-card-title">Normal</span>
+                        <span class="radio-card-subtitle">Baseline reading healthy</span>
+                      </div>
+                      <div class="radio-card" data-value="1" onclick="selectRadioCard(this, 'heart_restecg_input')">
+                        <span class="radio-card-title">ST-T Abnormality</span>
+                        <span class="radio-card-subtitle">Wave inversion / elevation</span>
+                      </div>
+                      <div class="radio-card" data-value="2" onclick="selectRadioCard(this, 'heart_restecg_input')">
+                        <span class="radio-card-title">LV Hypertrophy</span>
+                        <span class="radio-card-subtitle">Left ventricular strain</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="heart_restecg_input" name="restecg" value="0" />
+                  </div>
+                </div>
+              </div>
+              
+              <!-- STEP 3: Clinical -->
+              <div class="wizard-step-pane" data-step="3">
+                <h3>Step 3: Clinical laboratory biomarkers</h3>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label" for="heart_chol">Serum Cholesterol <span class="label-hint">(mg/dl, 100–600)</span></label>
+                    <input type="number" class="form-input" id="heart_chol" name="chol" placeholder="e.g., 220" min="100" max="600" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="heart_thalach">Maximum Heart Rate <span class="label-hint">(bpm, 60–220)</span></label>
+                    <input type="number" class="form-input" id="heart_thalach" name="thalach" placeholder="e.g., 160" min="60" max="220" required />
+                  </div>
+                  <div class="form-group slider-group">
+                    <div class="slider-header">
+                      <label class="form-label" for="heart_oldpeak">ST Depression (Oldpeak) <span class="label-hint">(0.0–6.2)</span></label>
+                      <span class="slider-val-readout" id="heart_oldpeak_readout">1.2</span>
+                    </div>
+                    <div class="slider-input-wrapper">
+                      <input type="range" class="form-slider" id="heart_oldpeak" name="oldpeak" min="0" max="6.2" step="0.1" value="1.2" oninput="updateSliderReadout(this, 'heart_oldpeak_readout')" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Slope of Peak Exercise ST Segment</label>
+                    <div class="segment-control">
+                      <div class="segment-item active" data-value="0" onclick="selectSegment(this, 'heart_slope_input')">Upsloping</div>
+                      <div class="segment-item" data-value="1" onclick="selectSegment(this, 'heart_slope_input')">Flat</div>
+                      <div class="segment-item" data-value="2" onclick="selectSegment(this, 'heart_slope_input')">Downsloping</div>
+                    </div>
+                    <input type="hidden" id="heart_slope_input" name="slope" value="0" />
+                  </div>
+                </div>
+              </div>
+              
+              <!-- STEP 4: Advanced -->
+              <div class="wizard-step-pane" data-step="4">
+                <h3>Step 4: Cardiographic diagnostics</h3>
+                <div class="form-grid">
+                  <div class="form-group full-width">
+                    <label class="form-label">Chest Pain Classification</label>
+                    <div class="radio-card-grid cols-2">
+                      <div class="radio-card active" data-value="0" onclick="selectRadioCard(this, 'heart_cp_input')">
+                        <span class="radio-card-title">Typical Angina</span>
+                        <span class="radio-card-subtitle">Exertional retrosternal discomfort</span>
+                      </div>
+                      <div class="radio-card" data-value="1" onclick="selectRadioCard(this, 'heart_cp_input')">
+                        <span class="radio-card-title">Atypical Angina</span>
+                        <span class="radio-card-subtitle">Non-exertional chest discomfort</span>
+                      </div>
+                      <div class="radio-card" data-value="2" onclick="selectRadioCard(this, 'heart_cp_input')">
+                        <span class="radio-card-title">Non-Anginal Pain</span>
+                        <span class="radio-card-subtitle">Pleuritic or sharp chest pain</span>
+                      </div>
+                      <div class="radio-card" data-value="3" onclick="selectRadioCard(this, 'heart_cp_input')">
+                        <span class="radio-card-title">Asymptomatic</span>
+                        <span class="radio-card-subtitle">No thoracic discomfort reported</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="heart_cp_input" name="cp" value="0" />
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Exercise-Induced Angina</label>
+                    <div class="segment-control">
+                      <div class="segment-item active" data-value="0" onclick="selectSegment(this, 'heart_exang_input')">No</div>
+                      <div class="segment-item" data-value="1" onclick="selectSegment(this, 'heart_exang_input')">Yes</div>
+                    </div>
+                    <input type="hidden" id="heart_exang_input" name="exang" value="0" />
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Major Vessels Colored by Fluoroscopy (ca)</label>
+                    <div class="chip-grid">
+                      <div class="chip-item active" data-value="0" onclick="selectChip(this, 'heart_ca_input')">0</div>
+                      <div class="chip-item" data-value="1" onclick="selectChip(this, 'heart_ca_input')">1</div>
+                      <div class="chip-item" data-value="2" onclick="selectChip(this, 'heart_ca_input')">2</div>
+                      <div class="chip-item" data-value="3" onclick="selectChip(this, 'heart_ca_input')">3</div>
+                      <div class="chip-item" data-value="4" onclick="selectChip(this, 'heart_ca_input')">4</div>
+                    </div>
+                    <input type="hidden" id="heart_ca_input" name="ca" value="0" />
+                  </div>
+                  
+                  <div class="form-group full-width">
+                    <label class="form-label">Thalassemia (thal)</label>
+                    <div class="radio-card-grid cols-4">
+                      <div class="radio-card active" data-value="0" onclick="selectRadioCard(this, 'heart_thal_input')">
+                        <span class="radio-card-title">Normal</span>
+                      </div>
+                      <div class="radio-card" data-value="1" onclick="selectRadioCard(this, 'heart_thal_input')">
+                        <span class="radio-card-title">Fixed Defect</span>
+                      </div>
+                      <div class="radio-card" data-value="2" onclick="selectRadioCard(this, 'heart_thal_input')">
+                        <span class="radio-card-title">Reversible</span>
+                      </div>
+                      <div class="radio-card" data-value="3" onclick="selectRadioCard(this, 'heart_thal_input')">
+                        <span class="radio-card-title">Severe</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="heart_thal_input" name="thal" value="0" />
+                  </div>
+                </div>
+              </div>
+              
+              <!-- STEP 5: Review -->
+              <div class="wizard-step-pane" data-step="5">
+                <h3>Step 5: Patient data verification</h3>
+                <p style="color:var(--text-secondary);font-size:0.88rem;margin-bottom:16px;">Verify that all patient features are correct before running the ML model:</p>
+                <div class="table-wrapper">
+                  <table class="medical-table">
+                    <thead>
+                      <tr>
+                        <th>Metric</th>
+                        <th>Entered Value</th>
+                      </tr>
+                    </thead>
+                    <tbody id="heartReviewTableBody">
+                      <!-- Filled dynamically by script -->
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div class="disclaimer-banner">
+                  <svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                  <p><strong>Clinical Disclaimer:</strong> This assessment evaluates probability weights based on a Gradient Boosting Classifier. It does not replace professional medical evaluations.</p>
+                </div>
+              </div>
+            </form>
+            
+            <div class="wizard-actions">
+              <button type="button" class="btn btn-secondary btn-icon" id="heartPrevBtn" onclick="navigateWizard('heart', -1)" disabled>
+                <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Back
+              </button>
+              <button type="button" class="btn btn-primary btn-icon" id="heartNextBtn" onclick="navigateWizard('heart', 1)">
+                Next
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== 3. HYPERTENSION WIZARD VIEW ====== -->
+        <div class="page-view" id="view-hypertension">
+          <div class="screening-wizard-container">
+            <div class="wizard-header">
+              <div class="wizard-title-area">
+                <div class="wizard-icon" style="background: rgba(37, 99, 235, 0.08); color: var(--secondary);">
+                  <svg viewBox="0 0 24 24" style="width:20px;height:20px;"><path fill="currentColor" d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <h2>Hypertension Screening</h2>
+              </div>
+              <div class="wizard-stepper" id="hyperStepper">
+                <div class="stepper-progress-track"></div>
+                <div class="stepper-progress-fill" style="width:0%;"></div>
+                <div class="step-node active" data-step="1">1<span class="step-label">Patient</span></div>
+                <div class="step-node" data-step="2">2<span class="step-label">Lifestyle</span></div>
+                <div class="step-node" data-step="3">3<span class="step-label">Vitals</span></div>
+                <div class="step-node" data-step="4">4<span class="step-label">Lab</span></div>
+                <div class="step-node" data-step="5">5<span class="step-label">Review</span></div>
+              </div>
+            </div>
+            
+            <form id="hyperWizardForm" class="wizard-form" onsubmit="submitHyperScreening(event)">
+              <!-- STEP 1: Personal -->
+              <div class="wizard-step-pane active" data-step="1">
+                <h3>Step 1: Patient overview</h3>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label" for="hyper_age">Age <span class="label-hint">(1–120 years)</span></label>
+                    <input type="number" class="form-input" id="hyper_age" name="age" placeholder="e.g., 45" min="1" max="120" required onchange="calculateHyperVitals()" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Gender</label>
+                    <div class="segment-control">
+                      <div class="segment-item active" data-value="1" onclick="selectSegment(this, 'hyper_gender_input')">Male</div>
+                      <div class="segment-item" data-value="0" onclick="selectSegment(this, 'hyper_gender_input')">Female</div>
+                    </div>
+                    <input type="hidden" id="hyper_gender_input" name="gender" value="1" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hyper_bmi">BMI <span class="label-hint">(kg/m², 10–60)</span></label>
+                    <input type="number" step="0.1" class="form-input" id="hyper_bmi" name="bmi" placeholder="e.g., 26.5" min="10" max="60" required />
+                    <button type="button" class="calculator-bridge-btn" onclick="openCalculatorFromForm('bmi', 'hyper_bmi')">
+                      <svg viewBox="0 0 24 24"><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 9h6v2H9V9zm0 4h6v2H9v-2z"/></svg>
+                      Use BMI Calculator
+                    </button>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Family History of Hypertension</label>
+                    <div class="segment-control">
+                      <div class="segment-item active" data-value="0" onclick="selectSegment(this, 'hyper_family_input')">No</div>
+                      <div class="segment-item" data-value="1" onclick="selectSegment(this, 'hyper_family_input')">Yes</div>
+                    </div>
+                    <input type="hidden" id="hyper_family_input" name="family_history" value="0" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Diabetes Comorbidity</label>
+                    <div class="segment-control">
+                      <div class="segment-item active" data-value="0" onclick="selectSegment(this, 'hyper_diabetes_input')">No</div>
+                      <div class="segment-item" data-value="1" onclick="selectSegment(this, 'hyper_diabetes_input')">Yes</div>
+                    </div>
+                    <input type="hidden" id="hyper_diabetes_input" name="diabetes" value="0" />
+                  </div>
+                </div>
+              </div>
+              
+              <!-- STEP 2: Lifestyle -->
+              <div class="wizard-step-pane" data-step="2">
+                <h3>Step 2: Behavioral & lifestyle factors</h3>
+                <div class="form-grid">
+                  <div class="form-group full-width">
+                    <label class="form-label">Smoking Habits</label>
+                    <div class="radio-card-grid cols-3">
+                      <div class="radio-card active" data-value="0" onclick="selectRadioCard(this, 'hyper_smoking_input')">
+                        <span class="radio-card-title">Never smoked</span>
+                        <span class="radio-card-subtitle">Zero tobacco usage</span>
+                      </div>
+                      <div class="radio-card" data-value="1" onclick="selectRadioCard(this, 'hyper_smoking_input')">
+                        <span class="radio-card-title">Former smoker</span>
+                        <span class="radio-card-subtitle">Quit smoking</span>
+                      </div>
+                      <div class="radio-card" data-value="2" onclick="selectRadioCard(this, 'hyper_smoking_input')">
+                        <span class="radio-card-title">Current smoker</span>
+                        <span class="radio-card-subtitle">Active tobacco usage</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="hyper_smoking_input" name="smoking" value="0" />
+                  </div>
+                  
+                  <div class="form-group full-width">
+                    <label class="form-label">Alcohol Intake</label>
+                    <div class="radio-card-grid cols-3">
+                      <div class="radio-card active" data-value="0" onclick="selectRadioCard(this, 'hyper_alcohol_input')">
+                        <span class="radio-card-title">None</span>
+                        <span class="radio-card-subtitle">No regular consumption</span>
+                      </div>
+                      <div class="radio-card" data-value="1" onclick="selectRadioCard(this, 'hyper_alcohol_input')">
+                        <span class="radio-card-title">Moderate</span>
+                        <span class="radio-card-subtitle">Occasional social drink</span>
+                      </div>
+                      <div class="radio-card" data-value="2" onclick="selectRadioCard(this, 'hyper_alcohol_input')">
+                        <span class="radio-card-title">Heavy</span>
+                        <span class="radio-card-subtitle">High weekly consumption</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="hyper_alcohol_input" name="alcohol" value="0" />
+                  </div>
+                  
+                  <div class="form-group full-width">
+                    <label class="form-label">Physical Activity Level</label>
+                    <div class="radio-card-grid cols-3">
+                      <div class="radio-card active" data-value="0" onclick="selectRadioCard(this, 'hyper_activity_input')">
+                        <span class="radio-card-title">Sedentary</span>
+                        <span class="radio-card-subtitle">Minimal daily movement</span>
+                      </div>
+                      <div class="radio-card" data-value="1" onclick="selectRadioCard(this, 'hyper_activity_input')">
+                        <span class="radio-card-title">Moderate</span>
+                        <span class="radio-card-subtitle">150m weekly exercise</span>
+                      </div>
+                      <div class="radio-card" data-value="2" onclick="selectRadioCard(this, 'hyper_activity_input')">
+                        <span class="radio-card-title">Active</span>
+                        <span class="radio-card-subtitle">Frequent vigorous exercise</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="hyper_activity_input" name="activity" value="0" />
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Salt Intake Level</label>
+                    <div class="chip-grid">
+                      <div class="chip-item active" data-value="0" onclick="selectChip(this, 'hyper_salt_input')">Low</div>
+                      <div class="chip-item" data-value="1" onclick="selectChip(this, 'hyper_salt_input')">Moderate</div>
+                      <div class="chip-item" data-value="2" onclick="selectChip(this, 'hyper_salt_input')">High</div>
+                    </div>
+                    <input type="hidden" id="hyper_salt_input" name="salt" value="0" />
+                  </div>
+                  
+                  <div class="form-group slider-group">
+                    <div class="slider-header">
+                      <label class="form-label" for="hyper_sleep">Daily Sleep <span class="label-hint">(hours/day)</span></label>
+                      <span class="slider-val-readout" id="hyper_sleep_readout">7</span>
+                    </div>
+                    <div class="slider-input-wrapper">
+                      <input type="range" class="form-slider" id="hyper_sleep" name="sleep" min="2" max="14" step="0.5" value="7" oninput="updateSliderReadout(this, 'hyper_sleep_readout')" />
+                    </div>
+                  </div>
+
+                  <div class="form-group slider-group full-width">
+                    <div class="slider-header">
+                      <label class="form-label" for="hyper_stress">Psychological Stress <span class="label-hint">(Scale 1-10)</span></label>
+                      <span class="slider-val-readout" id="hyper_stress_readout">5</span>
+                    </div>
+                    <div class="slider-input-wrapper">
+                      <input type="range" class="form-slider" id="hyper_stress" name="stress" min="1" max="10" step="1" value="5" oninput="updateSliderReadout(this, 'hyper_stress_readout')" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- STEP 3: Vitals -->
+              <div class="wizard-step-pane" data-step="3">
+                <h3>Step 3: Basic vital signs</h3>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label" for="hyper_systolic_bp">Systolic BP <span class="label-hint">(mmHg, 80–200)</span></label>
+                    <input type="number" class="form-input" id="hyper_systolic_bp" name="systolic_bp" placeholder="e.g., 120" min="80" max="200" required onchange="calculateHyperVitals()" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hyper_diastolic_bp">Diastolic BP <span class="label-hint">(mmHg, 50–130)</span></label>
+                    <input type="number" class="form-input" id="hyper_diastolic_bp" name="diastolic_bp" placeholder="e.g., 80" min="50" max="130" required onchange="calculateHyperVitals()" />
+                  </div>
+                  <div class="form-group full-width">
+                    <button type="button" class="calculator-bridge-btn" onclick="openCalculatorFromForm('bp', 'hyper_systolic_bp')">
+                      <svg viewBox="0 0 24 24"><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 9h6v2H9V9zm0 4h6v2H9v-2z"/></svg>
+                      Use BP Calculator Hub (Fills systolic & diastolic)
+                    </button>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hyper_heart_rate">Heart Rate <span class="label-hint">(bpm, 40–180)</span></label>
+                    <input type="number" class="form-input" id="hyper_heart_rate" name="heart_rate" placeholder="e.g., 72" min="40" max="180" required />
+                  </div>
+                </div>
+              </div>
+              
+              <!-- STEP 4: Lab -->
+              <div class="wizard-step-pane" data-step="4">
+                <h3>Step 4: Clinical laboratory panel</h3>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label" for="hyper_cholesterol">Total Cholesterol <span class="label-hint">(mg/dl, 50-400)</span></label>
+                    <input type="number" class="form-input" id="hyper_cholesterol" name="cholesterol" placeholder="e.g., 200" min="50" max="400" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hyper_ldl">LDL Cholesterol <span class="label-hint">(mg/dl, 30-300)</span></label>
+                    <input type="number" class="form-input" id="hyper_ldl" name="ldl" placeholder="e.g., 110" min="30" max="300" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hyper_hdl">HDL Cholesterol <span class="label-hint">(mg/dl, 15-100)</span></label>
+                    <input type="number" class="form-input" id="hyper_hdl" name="hdl" placeholder="e.g., 50" min="15" max="100" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hyper_triglycerides">Triglycerides <span class="label-hint">(mg/dl, 30-500)</span></label>
+                    <input type="number" class="form-input" id="hyper_triglycerides" name="triglycerides" placeholder="e.g., 140" min="30" max="500" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="hyper_glucose">Blood Glucose <span class="label-hint">(mg/dl, 50-300)</span></label>
+                    <input type="number" class="form-input" id="hyper_glucose" name="glucose" placeholder="e.g., 90" min="50" max="300" required />
+                  </div>
+                </div>
+              </div>
+              
+              <!-- STEP 5: Review -->
+              <div class="wizard-step-pane" data-step="5">
+                <h3>Step 5: Verification</h3>
+                <p style="color:var(--text-secondary);font-size:0.88rem;margin-bottom:16px;">Verify that all lifestyle and physiological markers are correct before analysis:</p>
+                <div class="table-wrapper">
+                  <table class="medical-table">
+                    <thead>
+                      <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                      </tr>
+                    </thead>
+                    <tbody id="hyperReviewTableBody">
+                      <!-- Filled dynamically by script -->
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div class="disclaimer-banner">
+                  <svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                  <p><strong>Clinical Disclaimer:</strong> Predictions represent statistical risks calculated by a RandomForest model trained on historical health datasets. Seek physician verification.</p>
+                </div>
+              </div>
+            </form>
+            
+            <div class="wizard-actions">
+              <button type="button" class="btn btn-secondary btn-icon" id="hyperPrevBtn" onclick="navigateWizard('hyper', -1)" disabled>
+                <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Back
+              </button>
+              <button type="button" class="btn btn-primary btn-icon" id="hyperNextBtn" onclick="navigateWizard('hyper', 1)">
+                Next
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== 4. DIABETES WIZARD VIEW ====== -->
+        <div class="page-view" id="view-diabetes">
+          <div class="screening-wizard-container">
+            <div class="wizard-header">
+              <div class="wizard-title-area">
+                <div class="wizard-icon" style="background: rgba(16, 185, 129, 0.08); color: var(--success);">
+                  <svg viewBox="0 0 24 24" style="width:20px;height:20px;"><path fill="currentColor" d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                </div>
+                <h2>Diabetes Screening</h2>
+              </div>
+              <div class="wizard-stepper" id="diabetesStepper">
+                <div class="stepper-progress-track"></div>
+                <div class="stepper-progress-fill" style="width:0%;"></div>
+                <div class="step-node active" data-step="1">1<span class="step-label">Vitals</span></div>
+                <div class="step-node" data-step="2">2<span class="step-label">Laboratory</span></div>
+                <div class="step-node" data-step="3">3<span class="step-label">Review</span></div>
+              </div>
+            </div>
+            
+            <form id="diabetesWizardForm" class="wizard-form" onsubmit="submitDiabetesScreening(event)">
+              <!-- STEP 1: Vitals -->
+              <div class="wizard-step-pane active" data-step="1">
+                <h3>Step 1: Patient & basic vitals</h3>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label" for="diab_age">Age <span class="label-hint">(1–120 years)</span></label>
+                    <input type="number" class="form-input" id="diab_age" name="age" placeholder="e.g., 35" min="1" max="120" required onchange="calculateDiabetesVitals()" />
+                  </div>
+                  <div class="form-group" id="diab_preg_group">
+                    <label class="form-label" for="diab_pregnancies">Pregnancies <span class="label-hint">(Count, 0-20)</span></label>
+                    <input type="number" class="form-input" id="diab_pregnancies" name="pregnancies" placeholder="e.g., 1" min="0" max="20" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="diab_bmi">BMI <span class="label-hint">(kg/m², 10–70)</span></label>
+                    <input type="number" step="0.1" class="form-input" id="diab_bmi" name="bmi" placeholder="e.g., 30.5" min="10" max="70" required />
+                    <button type="button" class="calculator-bridge-btn" onclick="openCalculatorFromForm('bmi', 'diab_bmi')">
+                      <svg viewBox="0 0 24 24"><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 9h6v2H9V9zm0 4h6v2H9v-2z"/></svg>
+                      Use BMI Calculator
+                    </button>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="diab_bp">Diastolic BP <span class="label-hint">(mmHg, 0-130)</span></label>
+                    <input type="number" class="form-input" id="diab_bp" name="blood_pressure" placeholder="e.g., 80" min="0" max="130" required onchange="calculateDiabetesVitals()" />
+                    <button type="button" class="calculator-bridge-btn" onclick="openCalculatorFromForm('bp', 'diab_bp')">
+                      <svg viewBox="0 0 24 24"><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 9h6v2H9V9zm0 4h6v2H9v-2z"/></svg>
+                      Use BP Calculator (Pulls diastolic)
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- STEP 2: Laboratory -->
+              <div class="wizard-step-pane" data-step="2">
+                <h3>Step 2: Laboratory markers</h3>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label" for="diab_glucose">Blood Glucose <span class="label-hint">(mg/dl, 0–300)</span></label>
+                    <input type="number" class="form-input" id="diab_glucose" name="glucose" placeholder="e.g., 120" min="0" max="300" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="diab_thickness">Triceps Skin Fold Thickness <span class="label-hint">(mm, 0–100)</span></label>
+                    <input type="number" class="form-input" id="diab_thickness" name="skin_thickness" placeholder="e.g., 23" min="0" max="100" required />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="diab_insulin">2-Hour Serum Insulin <span class="label-hint">(mu U/ml, 0–900)</span></label>
+                    <input type="number" class="form-input" id="diab_insulin" name="insulin" placeholder="e.g., 80" min="0" max="900" required />
+                  </div>
+                  <div class="form-group slider-group">
+                    <div class="slider-header">
+                      <label class="form-label" for="diab_dpf">Diabetes Pedigree Function <span class="label-hint">(0.000–2.500)</span></label>
+                      <span class="slider-val-readout" id="diab_dpf_readout">0.472</span>
+                    </div>
+                    <div class="slider-input-wrapper">
+                      <input type="range" class="form-slider" id="diab_dpf" name="dpf" min="0.001" max="2.5" step="0.001" value="0.472" oninput="updateSliderReadout(this, 'diab_dpf_readout')" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- STEP 3: Review -->
+              <div class="wizard-step-pane" data-step="3">
+                <h3>Step 3: Verification</h3>
+                <p style="color:var(--text-secondary);font-size:0.88rem;margin-bottom:16px;">Verify that all diabetes screening indicators are correct:</p>
+                <div class="table-wrapper">
+                  <table class="medical-table">
+                    <thead>
+                      <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                      </tr>
+                    </thead>
+                    <tbody id="diabReviewTableBody">
+                      <!-- Filled dynamically by script -->
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div class="disclaimer-banner">
+                  <svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                  <p><strong>Clinical Disclaimer:</strong> This screening runs predictions using a Random Forest Classifier trained on Pima Indian data. Decision threshold set at 0.52. Not a definitive diagnosis.</p>
+                </div>
+              </div>
+            </form>
+            
+            <div class="wizard-actions">
+              <button type="button" class="btn btn-secondary btn-icon" id="diabPrevBtn" onclick="navigateWizard('diab', -1)" disabled>
+                <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Back
+              </button>
+              <button type="button" class="btn btn-primary btn-icon" id="diabNextBtn" onclick="navigateWizard('diab', 1)">
+                Next
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== 5. CALCULATORS VIEW ====== -->
+        <div class="page-view" id="view-calculators">
+          <div class="calculators-grid">
+            <!-- BMI Calculator -->
+            <div class="calculator-card">
+              <div class="calculator-card-header">
+                <div class="calc-icon">
+                  <svg viewBox="0 0 24 24"><path d="M16.5 9.4L7.55 4.24a1.79 1.79 0 00-2.5 2.5L10.2 15.7a1.79 1.79 0 002.5.06l3.8-3.8a1.79 1.79 0 000-2.56z"/></svg>
+                </div>
+                <h3>Body Mass Index (BMI)</h3>
+              </div>
+              <div class="calc-form">
+                <div class="form-group">
+                  <label class="form-label" for="calc_bmi_height">Height <span class="label-hint">(cm)</span></label>
+                  <input type="number" class="form-input" id="calc_bmi_height" placeholder="e.g., 175" min="100" max="250" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="calc_bmi_weight">Weight <span class="label-hint">(kg)</span></label>
+                  <input type="number" class="form-input" id="calc_bmi_weight" placeholder="e.g., 75" min="30" max="250" />
+                </div>
+                
+                <div class="calc-results-pane" id="calc_bmi_result">
+                  <div class="calc-result-row">
+                    <span class="calc-result-label">Calculated BMI</span>
+                    <span class="calc-result-value highlight" id="calc_bmi_value">24.5</span>
+                  </div>
+                  <div class="calc-result-row">
+                    <span class="calc-result-label">Classification</span>
+                    <span class="calc-result-value" id="calc_bmi_class">Normal Weight</span>
+                  </div>
+                </div>
+                
+                <div class="calc-actions">
+                  <button class="btn btn-primary" style="flex-grow: 1;" onclick="runBmiCalculation()">Calculate</button>
+                  <button class="btn btn-secondary" id="calc_bmi_apply" onclick="applyBmiToForms()" style="display:none;">Apply to forms</button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- BP Classifier -->
+            <div class="calculator-card">
+              <div class="calculator-card-header">
+                <div class="calc-icon">
+                  <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <h3>BP Classification</h3>
+              </div>
+              <div class="calc-form">
+                <div class="form-group">
+                  <label class="form-label" for="calc_bp_sys">Systolic pressure <span class="label-hint">(mmHg)</span></label>
+                  <input type="number" class="form-input" id="calc_bp_sys" placeholder="e.g., 120" min="60" max="250" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="calc_bp_dia">Diastolic pressure <span class="label-hint">(mmHg)</span></label>
+                  <input type="number" class="form-input" id="calc_bp_dia" placeholder="e.g., 80" min="40" max="150" />
+                </div>
+                
+                <div class="calc-results-pane" id="calc_bp_result">
+                  <div class="calc-result-row">
+                    <span class="calc-result-label">Category</span>
+                    <span class="calc-result-value highlight" id="calc_bp_value">Normal</span>
+                  </div>
+                  <div class="calc-result-row">
+                    <span class="calc-result-label">Clinical Indication</span>
+                    <span class="calc-result-value" id="calc_bp_desc">Ideal ranges. Re-assess annually.</span>
+                  </div>
+                </div>
+                
+                <div class="calc-actions">
+                  <button class="btn btn-primary" style="flex-grow: 1;" onclick="runBpCalculation()">Calculate</button>
+                  <button class="btn btn-secondary" id="calc_bp_apply" onclick="applyBpToForms()" style="display:none;">Apply to forms</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ideal Body Weight -->
+            <div class="calculator-card">
+              <div class="calculator-card-header">
+                <div class="calc-icon">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                </div>
+                <h3>Ideal Body Weight (Devine formula)</h3>
+              </div>
+              <div class="calc-form">
+                <div class="form-group">
+                  <label class="form-label" for="calc_ibw_height">Height <span class="label-hint">(cm)</span></label>
+                  <input type="number" class="form-input" id="calc_ibw_height" placeholder="e.g., 175" min="100" max="250" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Biological Sex</label>
+                  <div class="segment-control">
+                    <div class="segment-item active" data-value="1" onclick="selectSegment(this, 'calc_ibw_sex')">Male</div>
+                    <div class="segment-item" data-value="0" onclick="selectSegment(this, 'calc_ibw_sex')">Female</div>
+                  </div>
+                  <input type="hidden" id="calc_ibw_sex" value="1" />
+                </div>
+                
+                <div class="calc-results-pane" id="calc_ibw_result">
+                  <div class="calc-result-row">
+                    <span class="calc-result-label">Estimated Ideal Weight</span>
+                    <span class="calc-result-value highlight" id="calc_ibw_value">70.3 kg</span>
+                  </div>
+                  <div class="calc-result-row">
+                    <span class="calc-result-label">Healthy Range</span>
+                    <span class="calc-result-value" id="calc_ibw_range">57 - 76 kg</span>
+                  </div>
+                </div>
+                
+                <div class="calc-actions">
+                  <button class="btn btn-primary" style="flex-grow: 1;" onclick="runIbwCalculation()">Calculate</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Daily Water Intake -->
+            <div class="calculator-card">
+              <div class="calculator-card-header">
+                <div class="calc-icon">
+                  <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                </div>
+                <h3>Daily Water Requirements</h3>
+              </div>
+              <div class="calc-form">
+                <div class="form-group">
+                  <label class="form-label" for="calc_water_weight">Weight <span class="label-hint">(kg)</span></label>
+                  <input type="number" class="form-input" id="calc_water_weight" placeholder="e.g., 75" min="30" max="250" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Physical Activity Level</label>
+                  <div class="segment-control">
+                    <div class="segment-item active" data-value="low" onclick="selectSegment(this, 'calc_water_act')">Low</div>
+                    <div class="segment-item" data-value="mod" onclick="selectSegment(this, 'calc_water_act')">Moderate</div>
+                    <div class="segment-item" data-value="high" onclick="selectSegment(this, 'calc_water_act')">High</div>
+                  </div>
+                  <input type="hidden" id="calc_water_act" value="low" />
+                </div>
+                
+                <div class="calc-results-pane" id="calc_water_result">
+                  <div class="calc-result-row">
+                    <span class="calc-result-label">Target Daily Intake</span>
+                    <span class="calc-result-value highlight" id="calc_water_value">2.6 Liters</span>
+                  </div>
+                  <div class="calc-result-row">
+                    <span class="calc-result-label">Fluid Ounces Equivalent</span>
+                    <span class="calc-result-value" id="calc_water_oz">88 fl oz</span>
+                  </div>
+                </div>
+                
+                <div class="calc-actions">
+                  <button class="btn btn-primary" style="flex-grow: 1;" onclick="runWaterCalculation()">Calculate</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== 6. SCREENING RESULTS PAGE ====== -->
+        <div class="page-view" id="view-results">
+          <div class="results-grid">
+            <div class="dashboard-main-col">
+              <div class="dashboard-card results-gauge-card">
+                <span id="resultsModelBadge"></span>
+                <h3 id="resultsDiseaseTitle" style="font-family: var(--font-heading); font-size:1.25rem; font-weight:700; margin-bottom: 24px;">Assessment Result</h3>
+                
+                <div class="gauge-wrapper">
+                  <svg class="gauge-svg" viewBox="0 0 200 200">
+                    <circle class="gauge-bg" cx="100" cy="100" r="86" />
+                    <circle class="gauge-fill" id="resultsGaugeCircle" cx="100" cy="100" r="86" style="stroke-dasharray: 540; stroke-dashoffset: 540;" />
+                  </svg>
+                  <div class="gauge-content">
+                    <span class="gauge-value" id="resultsGaugeValue">0%</span>
+                    <span class="gauge-label">Risk score</span>
+                  </div>
+                </div>
+                
+                <div>
+                  <div class="risk-badge" id="resultsRiskBadge">LOW RISK</div>
+                </div>
+                
+                <div class="results-meta-row">
+                  <div class="meta-item">
+                    <div class="meta-item-label">Confidence</div>
+                    <div class="meta-item-value" id="resultsConfidence">HIGH</div>
+                  </div>
+                  <div class="meta-item">
+                    <div class="meta-item-label">Accuracy</div>
+                    <div class="meta-item-value" id="resultsModelAccuracy">78.7%</div>
+                  </div>
+                  <div class="meta-item">
+                    <div class="meta-item-label">Data standard</div>
+                    <div class="meta-item-value" id="resultsDataStandard">Standardized</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="dashboard-card results-summary-card">
+                <h3 style="margin-bottom: 12px; font-family: var(--font-heading);">Diagnostic Clinical Summary</h3>
+                <p id="resultsSummaryText">Evaluating patient health status...</p>
+                
+                <div style="display:flex;gap:12px;margin-top:24px;">
+                  <button class="btn btn-primary" onclick="printReport()">
+                    <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.5;"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2m-12 0h12v4H6v-4z"/></svg>
+                    Print Clinical Report
+                  </button>
+                  <button class="btn btn-secondary" onclick="navigateTo('dashboard')">Back to Dashboard</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="dashboard-sidebar-col" style="display:flex; flex-direction:column; gap:28px;">
+              <div class="dashboard-card">
+                <h3 style="margin-bottom: 18px; font-family: var(--font-heading);">Key Contributing Factors</h3>
+                <div class="explain-section" id="resultsExplainSection">
+                  <!-- Factor bars loaded dynamically -->
+                </div>
+              </div>
+              
+              <div class="dashboard-card">
+                <h3 style="margin-bottom: 18px; font-family: var(--font-heading);">Clinical Recommendations</h3>
+                <div class="rec-cards-list" id="resultsRecommendationsList">
+                  <!-- Recommendation cards loaded dynamically -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== 7. HISTORY LOG VIEW ====== -->
+        <div class="page-view" id="view-history">
+          <div class="history-controls">
+            <h2 style="font-family: var(--font-heading); font-size:1.35rem; font-weight:700;">Diagnostic History Logs</h2>
+            <div style="display:flex; gap:12px;">
+              <button class="btn btn-secondary" onclick="compareSelectedHistory()">Compare Selected</button>
+              <button class="btn btn-secondary" onclick="exportHistory('csv')">Export CSV</button>
+              <button class="btn btn-secondary" onclick="exportHistory('json')">Export JSON</button>
+            </div>
+          </div>
+          
+          <div class="table-wrapper">
+            <table class="medical-table">
+              <thead>
+                <tr>
+                  <th style="width: 40px; text-align:center;">Select</th>
+                  <th>Assessment Date</th>
+                  <th>Type</th>
+                  <th>Calculated Risk</th>
+                  <th>Status Category</th>
+                  <th style="text-align:right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody">
+                <!-- Loaded dynamically by app.js -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Comparison Panel -->
+          <div class="comparison-pane" id="historyComparisonPane">
+            <div style="display:flex;justify-content:between;align-items:center;margin-bottom:16px;">
+              <h3 style="font-family:var(--font-heading);font-weight:700;">Assessment Side-by-Side Comparison</h3>
+              <button class="btn btn-secondary btn-icon" onclick="closeComparisonPane()" style="padding:4px 8px;font-size:0.75rem;">Close</button>
+            </div>
+            <div class="comparison-grid" id="comparisonGrid">
+              <!-- Grid filled by script -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== 8. ABOUT VIEW ====== -->
+        <div class="page-view" id="view-about">
+          <div class="about-grid">
+            <div class="dashboard-card">
+              <div style="text-align:center;margin-bottom:24px;">
+                <img src="static/assets/logo.png" alt="UAJK AIS Logo" style="width:96px;height:96px;object-fit:contain;margin-bottom:12px;" />
+                <h2 style="font-family: var(--font-heading);font-weight:800;color:var(--primary);">UAJK AI Society</h2>
+                <p style="color:var(--text-secondary);font-size:0.85rem;text-transform:uppercase;font-weight:600;letter-spacing:1px;">University of Azad Jammu & Kashmir</p>
+              </div>
+              <p style="color: var(--text-secondary);line-height:1.7;margin-bottom:16px;">
+                The UAJK Artificial Intelligence Society (UAJK AIS) represents a research and development guild dedicated to exploring applied machine learning fields. MedAI is a clinical screening suite leveraging scikit-learn classifiers trained on global epidemiological databases.
+              </p>
+              <h3 style="font-family:var(--font-heading);font-size:1rem;font-weight:700;margin-top:24px;margin-bottom:12px;">Core Academic Mandates</h3>
+              <ul style="padding-left:20px;color:var(--text-secondary);font-size:0.88rem;display:flex;flex-direction:column;gap:8px;">
+                <li>Bridging academic machine learning research with practical software architecture.</li>
+                <li>Ensuring clinical data pipeline alignment through standardization.</li>
+                <li>Empowering local student and research portfolios with production-quality prototypes.</li>
+              </ul>
+            </div>
+            
+            <div class="dashboard-card">
+              <h3 style="font-family:var(--font-heading);font-size:1.1rem;font-weight:700;margin-bottom:16px;">Clinical R&D Team</h3>
+              <div class="team-members-grid">
+                <div class="team-member-card">
+                  <div class="member-avatar">ML</div>
+                  <div class="member-info">
+                    <h4>ML Research Lead</h4>
+                    <p>Model optimization</p>
+                  </div>
+                </div>
+                <div class="team-member-card">
+                  <div class="member-avatar">BE</div>
+                  <div class="member-info">
+                    <h4>Backend Engineer</h4>
+                    <p>Model serving & API</p>
+                  </div>
+                </div>
+                <div class="team-member-card">
+                  <div class="member-avatar">UX</div>
+                  <div class="member-info">
+                    <h4>Product Designer</h4>
+                    <p>UI layout & design</p>
+                  </div>
+                </div>
+                <div class="team-member-card">
+                  <div class="member-avatar">MD</div>
+                  <div class="member-info">
+                    <h4>Medical Advisor</h4>
+                    <p>Feature mapping</p>
+                  </div>
+                </div>
+              </div>
+
+              <h3 style="font-family:var(--font-heading);font-size:1rem;font-weight:700;margin-top:28px;margin-bottom:12px;">Diagnostic Model Catalog</h3>
+              <div class="table-wrapper" style="margin-bottom:0;">
+                <table class="medical-table" style="font-size:0.78rem;">
+                  <thead>
+                    <tr>
+                      <th>Disease</th>
+                      <th>Algorithm</th>
+                      <th>Accuracy</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Heart Disease</td>
+                      <td>GradientBoostingClassifier</td>
+                      <td>78.7%</td>
+                    </tr>
+                    <tr>
+                      <td>Hypertension</td>
+                      <td>RandomForestClassifier</td>
+                      <td>71.4%</td>
+                    </tr>
+                    <tr>
+                      <td>Diabetes</td>
+                      <td>RandomForest (Threshold 0.52)</td>
+                      <td>~85%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ====== 9. SETTINGS VIEW ====== -->
+        <div class="page-view" id="view-settings">
+          <div class="dashboard-card" style="max-width:600px;margin:0 auto;">
+            <h3 style="font-family: var(--font-heading);font-weight:700;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:10px;">Platform Settings</h3>
+            
+            <div class="settings-group">
+              <div class="settings-row">
+                <div class="settings-info">
+                  <h4>Default Gender Presets</h4>
+                  <p>Auto-configure gender settings across diagnostic forms.</p>
+                </div>
+                <div class="segment-control" style="width:auto;min-width:160px;">
+                  <div class="segment-item active" onclick="setSettingDefaultGender(1)">Male</div>
+                  <div class="segment-item" onclick="setSettingDefaultGender(0)">Female</div>
+                </div>
+              </div>
+
+              <div class="settings-row">
+                <div class="settings-info">
+                  <h4>Clinical Mode</h4>
+                  <p>Enable rigorous feature review screens before backend query.</p>
+                </div>
+                <div class="segment-control" style="width:auto;min-width:160px;">
+                  <div class="segment-item active" onclick="setSettingClinicalMode(true)">Enabled</div>
+                  <div class="segment-item" onclick="setSettingClinicalMode(false)">Disabled</div>
+                </div>
+              </div>
+
+              <div class="settings-row">
+                <div class="settings-info">
+                  <h4>Diagnostic History</h4>
+                  <p>Permanently remove all locally cached diagnostic records.</p>
+                </div>
+                <button class="btn btn-secondary" onclick="clearAllHistory()" style="color:var(--danger);border-color:rgba(239,68,68,0.2);">Clear Cache</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ====== 10. PDF PRINT-READY CLINICAL REPORT ====== -->
+  <div class="print-report-container" id="clinicalReportPrintView">
+    <div class="print-header">
+      <div class="print-logo-section">
+        <img src="static/assets/logo.png" alt="UAJK AIS Logo" />
+        <div class="print-brand-text">
+          <h2>UAJK AI Society — MedAI</h2>
+          <p>Clinical Risk Screening Laboratory Report</p>
+        </div>
+      </div>
+      <div class="print-meta-section">
+        <div>Report ID: <strong id="printReportId">MED-78401923</strong></div>
+        <div>Date Run: <strong id="printReportDate">2026-06-02</strong></div>
+      </div>
+    </div>
+    
+    <div class="print-patient-info">
+      <div>
+        <div class="info-item-label">Patient Age</div>
+        <div class="info-item-value" id="printPatientAge">45 Years</div>
+      </div>
+      <div>
+        <div class="info-item-label">Gender</div>
+        <div class="info-item-value" id="printPatientGender">Male</div>
+      </div>
+      <div>
+        <div class="info-item-label">BMI</div>
+        <div class="info-item-value" id="printPatientBmi">27.5 kg/m²</div>
+      </div>
+      <div>
+        <div class="info-item-label">BP Level</div>
+        <div class="info-item-value" id="printPatientBp">130/85 mmHg</div>
+      </div>
+    </div>
+
+    <div class="print-section-title">Assessment Summary</div>
+    <div class="print-gauge-row">
+      <div class="gauge-wrapper">
+        <svg class="gauge-svg" viewBox="0 0 200 200">
+          <circle class="gauge-bg" cx="100" cy="100" r="86" />
+          <circle class="gauge-fill" id="printGaugeCircle" cx="100" cy="100" r="86" style="stroke-width:14; stroke-dasharray:540; stroke-dashoffset: 200;" />
+        </svg>
+        <div class="gauge-content">
+          <span class="gauge-value" id="printGaugeValue" style="font-size: 1.6rem;">65%</span>
+          <span class="gauge-label" style="font-size:0.6rem;">Risk</span>
+        </div>
+      </div>
+      <div class="print-gauge-text">
+        <h3 id="printDiseaseTitle">Cardiovascular Risk Assessment</h3>
+        <p><strong>Status Classification:</strong> <span id="printRiskCategory">HIGH RISK</span></p>
+        <p style="margin-top: 6px; font-size:0.85rem; color:var(--text-secondary);" id="printDiagnosticConclusion">The client exhibits elevated indicators. Immediate lifestyle modification and physician checkups recommended.</p>
+      </div>
+    </div>
+
+    <div class="print-section-title">Diagnostic Input Data</div>
+    <div class="table-wrapper">
+      <table class="medical-table" style="font-size: 0.8rem;">
+        <thead>
+          <tr>
+            <th>Parameter Name</th>
+            <th>Value</th>
+            <th>Reference Standard</th>
+          </tr>
+        </thead>
+        <tbody id="printInputsTableBody">
+          <!-- Filled dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <div class="print-section-title">Personalized Recommendations</div>
+    <ul style="padding-left: 20px; font-size:0.85rem; display:flex; flex-direction:column; gap:6px;" id="printRecommendationsList">
+      <!-- Filled dynamically -->
+    </ul>
+
+    <div class="print-signature-area">
+      <div class="sig-block">
+        <div class="sig-line"></div>
+        <div class="sig-title">Attending Physician/Operator</div>
+      </div>
+      <div class="sig-block">
+        <div style="font-size: 0.72rem; text-align:center; padding-top:20px; color:var(--text-secondary);">
+          UAJK AIS Medical Diagnostic Engine v1.8.0
+        </div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-line" style="border-bottom-style: double;"></div>
+        <div class="sig-title">UAJK AIS Director Signature</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="static/js/app.js"></script>
+</body>
+</html>
