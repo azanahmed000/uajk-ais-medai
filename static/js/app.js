@@ -1140,6 +1140,33 @@ async function checkBackendHealth() {
   }
 }
 
+// Scroll to landing section smoothly
+function scrollToLandingSection(sectionId) {
+  // If we are not on the landing page, make it active first
+  const landingPage = document.getElementById('view-landing');
+  if (landingPage && !landingPage.classList.contains('active')) {
+    navigateTo('landing');
+  }
+  
+  const element = document.getElementById(sectionId);
+  if (element) {
+    const appContent = document.getElementById('appContent');
+    if (appContent) {
+      const elementRect = element.getBoundingClientRect();
+      const parentRect = appContent.getBoundingClientRect();
+      const scrollTop = appContent.scrollTop;
+      const targetScroll = elementRect.top - parentRect.top + scrollTop;
+      
+      appContent.scrollTo({
+        top: targetScroll - (sectionId === 'landing-features' ? 80 : 0),
+        behavior: 'smooth'
+      });
+    } else {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Check backend connections
   checkBackendHealth();
@@ -1160,5 +1187,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const deskList = document.querySelector('.screening-options-list');
   if (screenList && deskList) {
     screenList.innerHTML = deskList.innerHTML;
+  }
+
+  // Sticky header scroll listener
+  const appContent = document.getElementById('appContent');
+  if (appContent) {
+    appContent.addEventListener('scroll', () => {
+      const header = document.getElementById('landingHeader');
+      if (header) {
+        if (appContent.scrollTop > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      }
+    });
   }
 });

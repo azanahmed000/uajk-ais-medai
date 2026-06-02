@@ -14,7 +14,7 @@
     
     <!-- ====== DESKTOP SIDEBAR ====== -->
     <aside class="app-sidebar" id="appSidebar">
-      <div class="sidebar-brand">
+      <div class="sidebar-brand" onclick="navigateTo('landing')" style="cursor: pointer;">
         <img src="static/assets/logo.png" alt="UAJK AIS Logo" />
         <div class="brand-text">
           MedAI
@@ -98,7 +98,8 @@
     <!-- ====== MAIN WORKSPACE ====== -->
     <main class="app-main">
       <header class="app-header">
-        <div class="header-title-area">
+        <div class="header-title-area" style="display: flex; align-items: center; gap: 12px;">
+          <img src="static/assets/logo.png" alt="UAJK AIS Logo" class="header-logo" onclick="navigateTo('landing')" style="width: 48px; height: 48px; object-fit: contain; cursor: pointer;" />
           <h1 id="headerTitle">Dashboard</h1>
         </div>
         <div class="header-status">
@@ -111,8 +112,168 @@
       
       <div class="app-content" id="appContent">
         
+        <!-- ====== 0. LANDING VIEW ====== -->
+        <div class="page-view active" id="view-landing">
+          <!-- Landing Sticky Header -->
+          <header class="landing-header" id="landingHeader">
+            <div class="landing-nav-inner">
+              <a href="#view-landing" class="landing-brand" onclick="scrollToLandingSection('view-landing')">
+                <img src="static/assets/logo.png" alt="UAJK AIS Logo" />
+                <span>MedAI</span>
+              </a>
+              <nav class="landing-nav-links">
+                <a href="#view-landing" onclick="scrollToLandingSection('view-landing')">Home</a>
+                <a href="#landing-features" onclick="scrollToLandingSection('landing-features')">Features</a>
+                <a href="#view-about" onclick="navigateTo('about')">About UAJK</a>
+                <button class="btn btn-primary" onclick="navigateTo('dashboard')">Start Assessment</button>
+              </nav>
+            </div>
+          </header>
+
+          <!-- Hero Section -->
+          <section class="landing-hero">
+            <!-- Layer 2: Subtle background pattern -->
+            <div class="hero-bg-pattern"></div>
+            
+            <!-- Layer 3: Large UAJK AIS logo watermark -->
+            <div class="hero-watermark"></div>
+            
+            <div class="hero-container">
+              <div class="hero-left">
+                <span class="hero-tag">UAJK AIS Research</span>
+                <h1 class="hero-title">AI-Powered Health Screening Platform</h1>
+                <p class="hero-desc">Early detection of Heart Disease, Hypertension, and Diabetes using Machine Learning.</p>
+                
+                <div class="hero-trust-list">
+                  <div class="trust-item">
+                    <svg viewBox="0 0 24 24" class="trust-check"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    <span>Heart Disease Screening</span>
+                  </div>
+                  <div class="trust-item">
+                    <svg viewBox="0 0 24 24" class="trust-check"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    <span>Hypertension Risk Analysis</span>
+                  </div>
+                  <div class="trust-item">
+                    <svg viewBox="0 0 24 24" class="trust-check"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    <span>Diabetes Risk Assessment</span>
+                  </div>
+                  <div class="trust-item">
+                    <svg viewBox="0 0 24 24" class="trust-check"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    <span>Instant Diagnostic Reports</span>
+                  </div>
+                </div>
+
+                <div class="hero-actions">
+                  <button class="btn btn-primary btn-lg" onclick="navigateTo('dashboard')">Start Assessment</button>
+                  <button class="btn btn-secondary btn-lg" onclick="scrollToLandingSection('landing-features')">Learn More</button>
+                </div>
+              </div>
+
+              <div class="hero-right">
+                <!-- Dashboard Mockup Preview -->
+                <div class="mockup-window">
+                  <div class="mockup-header">
+                    <span class="mockup-dot red"></span>
+                    <span class="mockup-dot yellow"></span>
+                    <span class="mockup-dot green"></span>
+                    <span class="mockup-title">MedAI Clinical Monitor</span>
+                  </div>
+                  <div class="mockup-body">
+                    <!-- Dashboard Mockup Content -->
+                    <div class="mockup-card risk-card">
+                      <div class="mockup-card-header">
+                        <span>Cardiovascular Risk Profile</span>
+                        <span class="mockup-badge red">High Risk</span>
+                      </div>
+                      <div class="mockup-gauge-area">
+                        <div class="mockup-gauge-circle">
+                          <svg viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="40" stroke="#E2E8F0" stroke-width="8" fill="transparent" />
+                            <circle cx="50" cy="50" r="40" stroke="#EF4444" stroke-width="8" fill="transparent" stroke-dasharray="251" stroke-dashoffset="60" stroke-linecap="round" />
+                          </svg>
+                          <span class="mockup-gauge-val">76%</span>
+                        </div>
+                        <div class="mockup-gauge-text">
+                          <h4>Patient ID: UAJK-4820</h4>
+                          <p>Risk Score: 76.4%<br>Confidence Level: High</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mockup-row">
+                      <div class="mockup-card stat-card">
+                        <span class="stat-label">Blood Glucose</span>
+                        <span class="stat-value">134 mg/dl</span>
+                        <div class="stat-trend up">Elevated</div>
+                      </div>
+                      <div class="mockup-card stat-card">
+                        <span class="stat-label">Blood Pressure</span>
+                        <span class="stat-value">142/92</span>
+                        <div class="stat-trend red">Stage 2 BP</div>
+                      </div>
+                    </div>
+
+                    <div class="mockup-card chart-card">
+                      <span>Feature Impact Analysis</span>
+                      <div class="mockup-chart-bars">
+                        <div class="mockup-chart-bar"><span class="bar-label">BP</span><div class="bar-track"><div class="bar-fill red" style="width: 85%;"></div></div></div>
+                        <div class="mockup-chart-bar"><span class="bar-label">BMI</span><div class="bar-track"><div class="bar-fill yellow" style="width: 65%;"></div></div></div>
+                        <div class="mockup-chart-bar"><span class="bar-label">Glucose</span><div class="bar-track"><div class="bar-fill red" style="width: 75%;"></div></div></div>
+                        <div class="mockup-chart-bar"><span class="bar-label">Stress</span><div class="bar-track"><div class="bar-fill green" style="width: 35%;"></div></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Features Grid Section -->
+          <section class="landing-features" id="landing-features">
+            <div class="features-header">
+              <span class="features-tag">Capabilities</span>
+              <h2>Intelligent Health Screening Features</h2>
+              <p>Explore the academic research and medical engineering capabilities developed for the MedAI platform.</p>
+            </div>
+            
+            <div class="features-grid">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3>AI-Powered Predictions</h3>
+                <p>Run diagnostics through Gradient Boosting and Random Forest classifiers optimized for high sensitivity and accuracy.</p>
+              </div>
+
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <h3>Fast Health Screening</h3>
+                <p>Enter physiological metrics through intuitive step-by-step wizard forms built to minimize clicks and typing.</p>
+              </div>
+
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+                </div>
+                <h3>Clinical PDF Reports</h3>
+                <p>Generate clean, print-friendly clinical laboratory sheets including risk gauges, values, and doctor signature spaces.</p>
+              </div>
+
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <h3>Personalized Recommendations</h3>
+                <p>Receive actionable lifestyle and medical guidelines mapped automatically based on specific high-risk features.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
         <!-- ====== 1. DASHBOARD VIEW ====== -->
-        <div class="page-view active" id="view-dashboard">
+        <div class="page-view" id="view-dashboard">
           <div class="welcome-card">
             <span class="welcome-badge">UAJK AIS Technology</span>
             <h2>Welcome to MedAI screening</h2>
