@@ -498,9 +498,14 @@ function runWaterCalculation() {
 }
 
 // ---- CONNECT TO FLASK API ENGINE ----
+// Map full disease type to the short prefix used in HTML element IDs
+const diseasePrefixMap = { heart: 'heart', hypertension: 'hyper', diabetes: 'diab' };
+
 async function handlePredictionQuery(diseaseType) {
+  const prefix = diseasePrefixMap[diseaseType] || diseaseType;
+
   // Get active step nodes to show loading
-  const formId = diseaseType === 'heart' ? 'heartWizardForm' : diseaseType === 'hypertension' ? 'hyperWizardForm' : 'diabetesWizardForm';
+  const formId = prefix + 'WizardForm';
   const form = document.getElementById(formId);
   
   // Build payload
@@ -515,7 +520,7 @@ async function handlePredictionQuery(diseaseType) {
   const endpoint = `/api/predict/${diseaseType}`;
   
   // Loading animations
-  const nextBtn = document.getElementById(diseaseType + 'NextBtn');
+  const nextBtn = document.getElementById(prefix + 'NextBtn');
   const origHtml = nextBtn.innerHTML;
   nextBtn.disabled = true;
   nextBtn.innerHTML = '<span class="status-dot" style="background:#fff;animation:pulse 1s infinite;"></span> Querying AI...';
@@ -571,7 +576,8 @@ async function handlePredictionQuery(diseaseType) {
 }
 
 // Reset form elements
-function resetWizard(type) {
+function resetWizard(diseaseType) {
+  const type = diseasePrefixMap[diseaseType] || diseaseType;
   wizardSteps[type] = 1;
   const form = document.getElementById(type + 'WizardForm');
   form.reset();

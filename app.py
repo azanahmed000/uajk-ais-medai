@@ -43,8 +43,8 @@ MODEL_PATHS = {
 # Based on the UCI Cleveland Heart Disease dataset statistics
 # Features: age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal
 HEART_FEATURE_NAMES = ["age", "sex", "cp", "trestbps", "chol", "fbs", "restecg", "thalach", "exang", "oldpeak", "slope", "ca", "thal"]
-HEART_SCALER_MEAN = np.array([54.37, 0.68, 0.97, 131.62, 246.26, 0.15, 0.53, 149.65, 0.33, 1.04, 1.40, 0.73, 2.31])
-HEART_SCALER_STD  = np.array([9.08, 0.47, 1.03, 17.54, 51.83, 0.36, 0.53, 22.91, 0.47, 1.16, 0.62, 1.02, 0.61])
+HEART_SCALER_MEAN = np.array([54.42052980, 0.00000000, 0.00000000, 131.60264901, 246.50000000, 0.00000000, 0.00000000, 149.56953642, 0.00000000, 1.04304636, 0.00000000, 0.00000000, 0.00000000])
+HEART_SCALER_STD  = np.array([9.03297724, 1.00000000, 1.00000000, 17.53429165, 51.66773302, 1.00000000, 1.00000000, 22.86557606, 1.00000000, 1.15952776, 1.00000000, 1.00000000, 1.00000000])
 
 # Hypertension model features (19)
 # Features: Age, BMI, Cholesterol, Systolic_BP, Diastolic_BP, Smoking_Status,
@@ -225,14 +225,28 @@ def predict_heart():
             float(data.get("thal", 0)),
         ]).reshape(1, -1)
 
-        # Apply StandardScaler (hardcoded params from training data)
-        scaled_values = (raw_values - HEART_SCALER_MEAN) / HEART_SCALER_STD
+        # Map categorical features from HTML values
+        cp_map = {0: 3, 1: 1, 2: 2, 3: 0}
+        restecg_map = {0: 1, 1: 2, 2: 0}
+        slope_map = {0: 2, 1: 1, 2: 0}
+        thal_map = {0: 2, 1: 1, 2: 3, 3: 0}
 
-        # Predict
+        mapped_values = raw_values.copy().astype(float)
+        mapped_values[0, 2] = cp_map.get(int(raw_values[0, 2]), 0)
+        mapped_values[0, 6] = restecg_map.get(int(raw_values[0, 6]), 0)
+        mapped_values[0, 10] = slope_map.get(int(raw_values[0, 10]), 0)
+        mapped_values[0, 12] = thal_map.get(int(raw_values[0, 12]), 0)
+
+        # Apply StandardScaler (hardcoded params from training data)
+        scaled_values = (mapped_values - HEART_SCALER_MEAN) / HEART_SCALER_STD
+
+        # Predict (Target: 1.0 -> Healthy, 0.0 -> Disease, so predict_proba[:, 0] is disease probability)
         model = models["heart"]
-        prediction = int(model.predict(scaled_values)[0])
         probabilities = model.predict_proba(scaled_values)[0]
-        risk_percent = round(float(probabilities[1]) * 100, 1)
+        
+        # Risk of disease is probability of class 0
+        risk_percent = round(float(probabilities[0]) * 100, 1)
+        prediction = 1 if probabilities[0] >= 0.5 else 0
 
         logger.info(f"Heart prediction: {prediction} (risk: {risk_percent}%)")
 
@@ -242,8 +256,8 @@ def predict_heart():
             "risk_percent": risk_percent,
             "label": "Heart Disease Detected" if prediction == 1 else "No Heart Disease",
             "probabilities": {
-                "no_disease": round(float(probabilities[0]) * 100, 1),
-                "disease": round(float(probabilities[1]) * 100, 1),
+                "no_disease": round(float(probabilities[1]) * 100, 1),
+                "disease": round(float(probabilities[0]) * 100, 1),
             }
         })
 
